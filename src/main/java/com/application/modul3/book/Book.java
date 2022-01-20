@@ -21,8 +21,8 @@ public class Book {
 	@Column(name = "year")
 	private int year;
 
-	@Column(name = "cod")
-	private String cod;
+	@Column(name = "isbn")
+	private String isbn;
 
 	protected Integer getId() {
 		return id;
@@ -48,12 +48,12 @@ public class Book {
 		this.year = year;
 	}
 
-	protected String getCod() {
-		return cod;
+	protected String getIsbn() {
+		return isbn;
 	}
 
-	protected void setCod(String cod) {
-		this.cod = cod;
+	protected void setIbn(String isbn) {
+		this.isbn = isbn;
 	}
 	
 	
