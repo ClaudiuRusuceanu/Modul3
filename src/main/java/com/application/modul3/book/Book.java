@@ -24,37 +24,36 @@ public class Book {
 	@Column(name = "isbn")
 	private String isbn;
 
-	protected Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	protected void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	protected String getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	protected void setTitle(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
-	protected int getYear() {
+	public int getYear() {
 		return year;
 	}
 
-	protected void setYear(int year) {
+	public void setYear(int year) {
 		this.year = year;
 	}
 
-	protected String getIsbn() {
+	public String getIsbn() {
 		return isbn;
 	}
 
-	protected void setIbn(String isbn) {
+	public void setIsbn(String isbn) {
 		this.isbn = isbn;
 	}
-	
-	
+
 }
