@@ -1,4 +1,4 @@
-package com.application.modul3.book;
+package com.application.modul3.author;
 
 import java.util.List;
 
@@ -11,30 +11,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.application.modul3.book.Book;
+
 @RestController
-@RequestMapping("/book")
-public class BookController {
+@RequestMapping("/author")
+public class AuthorController {
 	@Autowired
-	private BookService bookService;
+	private AuthorService authorService;
 
 	@PostMapping
-	public Book createCarte(@RequestBody Book book) {
-		return bookService.createBook(book);
+	public Author createAuthor(@RequestBody Author author) {
+		return authorService.createAuthor(author);
 	}
 
 	@GetMapping("/list")
-	public List<Book> getAllBooks() {
-		return bookService.getAllBooks();
+	public List<Author> getAllAuthors() {
+		return authorService.getAllAuthors();
+
 	}
 
 	@GetMapping("/{id}")
-	public Book getBookById(@PathVariable Integer id) {
-		return bookService.getBookById(id);
+	public Author getAuthorById(@PathVariable Integer id) {
+		return authorService.getAuthorById(id);
 	}
 
 	@DeleteMapping("/{id}")
-	public void deleteBookById(@PathVariable Integer id) {
-		bookService.deleteBookById(id);
+	public void deleteAuthorById(@PathVariable Integer id) {
+		authorService.deleteAuthorById(id);
 	}
 
 }
