@@ -4,17 +4,21 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.application.modul3.gender.Gender;
+
 @Entity
 @Table(name = "author", schema = "administration")
-
 public class Author {
 
 	@Id
+	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -24,8 +28,9 @@ public class Author {
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
 
+	@Enumerated(EnumType.STRING)
 	@Column(name = "gender")
-	private String gender;
+	private Gender gender;
 
 	@Column(name = "death_date")
 	private LocalDate deathDate;
@@ -50,15 +55,15 @@ public class Author {
 		return birthDate;
 	}
 
-	public void setBirthDate(LocalDate birthDate) {
-		this.birthDate = birthDate;
+	public void setBirthDate(String birthDate) {
+		this.birthDate = LocalDate.parse(birthDate);
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -66,9 +71,8 @@ public class Author {
 		return deathDate;
 	}
 
-	public void setDeathDate(LocalDate deathDate) {
-		this.deathDate = deathDate;
+	public void setDeathDate(String deathDate) {
+		this.deathDate = LocalDate.parse(deathDate);
 	}
 
-	
 }

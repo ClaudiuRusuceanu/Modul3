@@ -26,7 +26,7 @@ public class Book {
 	private String title;
 
 	@Column(name = "year")
-	private LocalDate yearBook; 
+	private LocalDate yearBook; // LocalDate ->"yyyy-mm-dd"
 
 	@Column(name = "isbn")
 	private String isbn;
@@ -53,11 +53,11 @@ public class Book {
 
 	public LocalDate getYearBook() {
 		return yearBook;
-		
 	}
 
-	public void setYearBook(String date) {
-		this.yearBook = LocalDate.parse(date);
+	
+	public void setYearBook(LocalDate yearBook) {
+		this.yearBook = yearBook;
 	}
 
 	public String getIsbnBook() {
