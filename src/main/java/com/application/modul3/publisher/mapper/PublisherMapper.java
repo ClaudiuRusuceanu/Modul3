@@ -16,19 +16,18 @@ public class PublisherMapper {
 		publisherDTO.setId(publisher.getId());
 		publisherDTO.setName(publisher.getName());
 		publisherDTO.setAddress(publisher.getAddress());
-		publisherDTO.setYear(publisher.getYear());
 		return publisherDTO;
 	}
 
 	public Publisher publisherDTO2Publisher(PublisherDTO publisherDTO) {
 		Publisher publisher = new Publisher();
+		publisher.setId(publisherDTO.getId());
 		publisher.setName(publisherDTO.getName());
 		publisher.setAddress(publisherDTO.getAddress());
-		publisher.setYear(publisherDTO.getYear());
 		return publisher;
 	}
 
-	public List<PublisherDTO> publisherList2PublisherListDTO(List<Publisher> publishers) {
+	public List<PublisherDTO> publisherList2PublisherDTOList(List<Publisher> publishers) {
 		return publishers.stream().map(publisher -> publisher2PublisherDTO(publisher)).collect(Collectors.toList());
 	}
 }

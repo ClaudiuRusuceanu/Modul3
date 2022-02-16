@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.application.modul3.publisher.dto.PublisherDTO;
 import com.application.modul3.publisher.mapper.PublisherMapper;
 
@@ -21,35 +19,33 @@ public class PublisherController {
 	@Autowired
 	private PublisherService publisherService;
 
-
 	@Autowired
 	private PublisherMapper publisherMapper;
 
-	@PostMapping
+	@PostMapping()
 	public PublisherDTO createPublisher(@RequestBody PublisherDTO publisherDTO) {
-		Publisher createdPublisher = publisherService
+		Publisher createPublisher = publisherService
 				.createPublisher(publisherMapper.publisherDTO2Publisher(publisherDTO));
-		return publisherMapper.publisher2PublisherDTO(createdPublisher);
+		return publisherMapper.publisher2PublisherDTO(createPublisher);
 	}
+
+//	@PostMapping("/add/book/{bookId}/{publisherId}")
+//	public void setPublisher(@PathVariable Integer bookId, @PathVariable Integer publisherId) {
+//		publisherService.setPublisherBook(publisherId, bookId);
+//	}
 
 	@GetMapping("/list")
-	public List<PublisherDTO> getAllPublishers() {
-		return publisherMapper.publisherList2PublisherListDTO(publisherService.getAllPublishers());
+	public List<PublisherDTO> getAllPublisher() {
+		return publisherMapper.publisherList2PublisherDTOList(publisherService.getAllPublisher());
 	}
 
-	@GetMapping("/id")
-	public Publisher getPublisherById(Integer id) {
-		return publisherService.getPublisherById(id);
-	}
-
-	@PutMapping("/{id}")
-	public Publisher updatePublisher(@RequestBody Publisher publisher, @PathVariable Integer id) {
-		return publisherService.updatePulbisherById(publisher, id);
+	@GetMapping("/{id}")
+	public PublisherDTO getPublisherById(@PathVariable Integer id) {
+		return publisherMapper.publisher2PublisherDTO(publisherService.getPublisherById(id));
 	}
 
 	@DeleteMapping("/{id}")
-	public void deletePublisher(Integer id) {
+	public void deletePublisherById(@PathVariable Integer id) {
 		publisherService.deletePublisherById(id);
 	}
-
 }

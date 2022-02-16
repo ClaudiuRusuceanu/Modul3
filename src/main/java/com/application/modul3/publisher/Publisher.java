@@ -1,7 +1,5 @@
 package com.application.modul3.publisher;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +12,6 @@ import javax.persistence.Table;
 public class Publisher {
 
 	@Id
-	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -23,9 +20,6 @@ public class Publisher {
 
 	@Column(name = "address")
 	private String address;
-
-	@Column(name = "year")
-	private LocalDate year;
 
 	public Integer getId() {
 		return id;
@@ -50,13 +44,4 @@ public class Publisher {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public LocalDate getYear() {
-		return year;
-	}
-
-	public void setYear(LocalDate year) {
-		this.year = year;
-	}
-
 }
