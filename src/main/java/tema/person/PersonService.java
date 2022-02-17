@@ -39,6 +39,8 @@ public class PersonService {
 		personUpdate.setNume(person.getNume());
 		personUpdate.setPrenume(person.getPrenume());
 		personUpdate.setVarsta(person.getVarsta());
+
+		personRepository.flush();
 		return personUpdate;
 	}
 

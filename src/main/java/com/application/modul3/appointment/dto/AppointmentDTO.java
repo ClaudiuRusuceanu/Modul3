@@ -1,28 +1,25 @@
 package com.application.modul3.appointment.dto;
 
-import java.time.LocalDateTime;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 
 public class AppointmentDTO {
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
-	private LocalDateTime dateFrom;
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss[.SSS][.SS][.S]")
-	private LocalDateTime dateUntil;
+	private LocalDate dateFrom;
+	private LocalDate dateUntil;
 
-	public LocalDateTime getDateFrom() {
+	public LocalDate getDateFrom() {
 		return dateFrom;
 	}
 
-	public void setDateFrom(LocalDateTime dateFrom) {
+	public void setDateFrom(LocalDate dateFrom) {
 		this.dateFrom = dateFrom;
 	}
 
-	public LocalDateTime getDateUntil() {
+	public LocalDate getDateUntil() {
 		return dateUntil;
 	}
 
-	public void setDateUntil(LocalDateTime dateUntil) {
+	public void setDateUntil(LocalDate dateUntil) {
 		this.dateUntil = dateUntil;
 	}
+
 }

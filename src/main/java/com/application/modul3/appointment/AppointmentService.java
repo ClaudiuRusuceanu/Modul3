@@ -1,13 +1,12 @@
 package com.application.modul3.appointment;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.application.modul3.appointment.dto.AppointmentInfoDTO;
 import com.application.modul3.exemplary.Exemplary;
 import com.application.modul3.exemplary.ExemplaryRepository;
 import com.application.modul3.user.User;
@@ -28,22 +27,18 @@ public class AppointmentService {
 		return appointmentRepository.findByUser(userId);
 	}
 
-	public List<Exemplary> getExemplariesForUserAndPeriod(AppointmentInfoDTO appointmentInfoDTO) {
-		return exemplaryRepository.getExemplariesForUserAndPeriod(appointmentInfoDTO.getDateFrom(),
-				appointmentInfoDTO.getDateUntil(), appointmentInfoDTO.getBookId(), appointmentInfoDTO.getUserId());
+	public List<Exemplary> findFreeExemplaries(LocalDate startDate, LocalDate endDate, Integer bookId) {
+		return exemplaryRepository.getExemplariesForUserAndPeriod(startDate, endDate, bookId);
 	}
 
-	public void book(Integer exemplaryId, Integer userId) {
+	public void book(Appointment appointment, Integer exemplaryId, Integer userId) {
 		Exemplary exemplary = exemplaryRepository.getById(exemplaryId);
 		User user = userService.getUserById(userId);
 
-		Appointment appointment = new Appointment(exemplary, user);
-		appointment.setDateFrom(LocalDateTime.now());
-		appointment.setDateUntil(LocalDateTime.now());
 		exemplary.addAppointment(appointment);
 		user.addAppointment(appointment);
 
-		appointmentRepository.flush();
+		appointmentRepository.saveAndFlush(appointment);
 	}
 
 }

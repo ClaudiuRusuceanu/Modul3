@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import com.application.modul3.appointment.Appointment;
+import com.application.modul3.appointment.dto.AppointmentCreateDTO;
 import com.application.modul3.appointment.dto.AppointmentDTO;
 
 @Component
@@ -19,5 +20,12 @@ public class AppointmentMapper {
 
 	public List<AppointmentDTO> appointmentDBList2AppointmentList(List<Appointment> appointmentDBList) {
 		return appointmentDBList.stream().map(app -> appointmentDB2Appointment(app)).collect(Collectors.toList());
+	}
+
+	public Appointment appointmnetCreateDTO2Appointment(AppointmentCreateDTO appointmentCreateDTO) {
+		Appointment appointment = new Appointment();
+		appointment.setDateFrom(appointmentCreateDTO.getStartDate());
+		appointment.setDateUntil(appointmentCreateDTO.getEndDate());
+		return appointment;
 	}
 }

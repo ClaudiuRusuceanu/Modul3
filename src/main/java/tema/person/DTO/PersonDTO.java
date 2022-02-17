@@ -1,6 +1,7 @@
 package tema.person.DTO;
 
 public class PersonDTO {
+	private Integer id;
 	private String nume;
 	private String prenume;
 	private Integer varsta;

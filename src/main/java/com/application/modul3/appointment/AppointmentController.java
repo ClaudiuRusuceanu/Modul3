@@ -1,5 +1,6 @@
 package com.application.modul3.appointment;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import com.application.modul3.appointment.dto.AppointmentCreateDTO;
 import com.application.modul3.appointment.dto.AppointmentDTO;
 import com.application.modul3.appointment.dto.AppointmentInfoDTO;
 import com.application.modul3.appointment.mapper.AppointmentMapper;
@@ -28,20 +29,18 @@ public class AppointmentController {
 	@Autowired
 	private ExemplaryMapper exemplaryMapper;
 
-	@GetMapping("/list/{userId}")
-	public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
-		List<Appointment> appointmentDBs = new ArrayList<>(appointmentService.getAllAppointmentsForUser(userId));
-		return appointmentMapper.appointmentDBList2AppointmentList(appointmentDBs);
+	@GetMapping("/find/{startDate}/{endDate}/{bookId}")
+	public List<ExemplaryDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
+			@PathVariable Integer bookId) {
+		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate),
+				LocalDate.parse(endDate), bookId);
+		return exemplaryMapper.exemplaryList2ExemplaryDTOList(freeExemplaries);
 	}
 
-	@PostMapping("/find")
-	public List<ExemplaryDTO> getExemplariesForUserAndPeriod(@RequestBody AppointmentInfoDTO appointmentInfoDTO) {
-		List<Exemplary> exemplaries = appointmentService.getExemplariesForUserAndPeriod(appointmentInfoDTO);
-		return exemplaryMapper.exemplaryList2ExemplaryDTOList(exemplaries);
-	}
-
-	@GetMapping("/book/{exemplaryId}/{userId}")
-	public void book(@PathVariable Integer exemplaryId, @PathVariable Integer userId) {
-		appointmentService.book(exemplaryId, userId);
+	@PostMapping("/book/{exemplaryId}/{userId}")
+	public void book(@RequestBody AppointmentCreateDTO appointmentCreateDTO, @PathVariable Integer exemplaryId,
+			@PathVariable Integer userId) {
+		appointmentService.book(appointmentMapper.appointmnetCreateDTO2Appointment(appointmentCreateDTO), exemplaryId,
+				userId);
 	}
 }
