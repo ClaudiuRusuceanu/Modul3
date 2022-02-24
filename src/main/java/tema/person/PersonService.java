@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tema.car.CarRepository;
+import tema.curs.Curs;
+import tema.curs.CursService;
+
 
 @Service
 public class PersonService {
 
 	@Autowired
 	private PersonRepository personRepository;
+	
+	@Autowired
+	private CursService cursService;
 
 	public Person createPerson(Person person) {
 		return personRepository.saveAndFlush(person);
@@ -43,5 +49,14 @@ public class PersonService {
 		personRepository.flush();
 		return personUpdate;
 	}
+	
+	public void addCursToPerson(Integer personId, Integer cursId) {
+		Person person = findPersonById(personId);
+		Curs curs = cursService.findCursById(cursId);
+		person.addCurs(curs);
+		personRepository.save(person);
+	}
+	
+	
 
 }

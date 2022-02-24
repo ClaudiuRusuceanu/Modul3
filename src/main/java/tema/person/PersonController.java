@@ -51,4 +51,10 @@ public class PersonController {
 		personService.deletePersonById(id);
 	}
 
+	@PutMapping("/{personId}")
+	public PersonDTO updatePerson(@RequestBody PersonDTO personDTO, @PathVariable Integer personId) {
+		Person person = personService.updatePerson(personMapper.personDTO2person(personDTO), personId);
+		return personMapper.person2personDTO(person);
+	}
+
 }
