@@ -3,23 +3,23 @@ package com.application.modul3.appointment.dto;
 import java.time.LocalDate;
 
 public class AppointmentCreateDTO {
-	private LocalDate startDate;
-	private LocalDate endDate;
 
-	public LocalDate getStartDate() {
-		return startDate;
+	private LocalDate dateFrom;
+	private LocalDate dateUntil;
+
+	public LocalDate getDateFrom() {
+		return dateFrom;
 	}
 
-	public void setStartDate(LocalDate startDate) {
-		this.startDate = startDate;
+	public void setDateFrom(LocalDate dateFrom) {
+		this.dateFrom = dateFrom;
 	}
 
-	public LocalDate getEndDate() {
-		return endDate;
+	public LocalDate getDateUntil() {
+		return dateUntil;
 	}
 
-	public void setEndDate(LocalDate endDate) {
-		this.endDate = endDate;
+	public void setDateUntil(LocalDate dateUntil) {
+		this.dateUntil = dateUntil;
 	}
-
 }

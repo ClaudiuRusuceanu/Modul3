@@ -7,6 +7,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -36,9 +37,8 @@ public class Book {
 	private String isbn;
 
 	// entitatea parinte
-	@OneToMany(mappedBy = "book", cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+	@OneToMany(mappedBy = "book", fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.REMOVE }, orphanRemoval = true)
-	// @JsonIgnoreProperties("book")
 	private Set<Exemplary> exemplaries;
 
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })

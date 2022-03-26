@@ -77,4 +77,5 @@ public class Appointment {
 	public void setDateUntil(LocalDate dateUntil) {
 		this.dateUntil = dateUntil;
 	}
+
 }

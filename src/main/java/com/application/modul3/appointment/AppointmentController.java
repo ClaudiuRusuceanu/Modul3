@@ -1,6 +1,5 @@
 package com.application.modul3.appointment;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.application.modul3.appointment.dto.AppointmentCreateDTO;
 import com.application.modul3.appointment.dto.AppointmentDTO;
 import com.application.modul3.appointment.dto.AppointmentInfoDTO;
@@ -29,18 +29,23 @@ public class AppointmentController {
 	@Autowired
 	private ExemplaryMapper exemplaryMapper;
 
-	@GetMapping("/find/{startDate}/{endDate}/{bookId}")
-	public List<ExemplaryDTO> findFreeExemplaries(@PathVariable String startDate, @PathVariable String endDate,
-			@PathVariable Integer bookId) {
-		List<Exemplary> freeExemplaries = appointmentService.findFreeExemplaries(LocalDate.parse(startDate),
-				LocalDate.parse(endDate), bookId);
-		return exemplaryMapper.exemplaryList2ExemplaryDTOList(freeExemplaries);
+	@GetMapping("/list/{userId}")
+	public List<AppointmentDTO> getAppointmentsForUser(@PathVariable Integer userId) {
+		List<Appointment> appointmentDBs = new ArrayList<>(appointmentService.getAllAppointmentsForUser(userId));
+		return appointmentMapper.appointmentList2AppointmentListDTO(appointmentDBs);
+	}
+
+	@PostMapping("/find")
+	public List<ExemplaryDTO> getExemplariesForPeriod(@RequestBody AppointmentInfoDTO appointmentInfoDTO) {
+		List<Exemplary> exemplaries = appointmentService.getExemplariesForPeriod(appointmentInfoDTO.getDateFrom(),
+				appointmentInfoDTO.getDateUntil(), appointmentInfoDTO.getBookId());
+		return exemplaryMapper.exemplaryList2ExemplaryDTOList(exemplaries);
 	}
 
 	@PostMapping("/book/{exemplaryId}/{userId}")
 	public void book(@RequestBody AppointmentCreateDTO appointmentCreateDTO, @PathVariable Integer exemplaryId,
 			@PathVariable Integer userId) {
-		appointmentService.book(appointmentMapper.appointmnetCreateDTO2Appointment(appointmentCreateDTO), exemplaryId,
+		appointmentService.book(appointmentMapper.appointmentCreateDTO2Appointment(appointmentCreateDTO), exemplaryId,
 				userId);
 	}
 }
